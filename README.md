@@ -39,3 +39,23 @@ autoresizing masks仅仅是布局改进的一个迭代，auto layout是一种全
 设计一组约束来创建特定行为的逻辑是非常不同于通过写代码或者面向对象编码的逻辑。幸运的是，掌握Auto Layout与掌握其他的编程任务并没有什么不同。第一：理解基于约束的layouts背后的逻辑;第二：学习API。在学习其他的编程任务的时候，你已经遵循了这些步骤，Auto Layout也不例。
 
 上面所记载的文字旨在帮助我过渡到Auto Layout，下面的文字将帮助我进一步学习Auto Layout。
+
+stack view提供了一种简单的方式来利用Auto Layout的功能，而不引入约束的复杂性。一个satck view管理用户界面元素的行或列。stack view通过属性来管理元素。
+
+axis：（UIStackView Only）定义了satck view的方向，水平或者垂直。轴
+
+orientation：（NSStackView Only）定义了satck view的方向，水平或者垂直。轴
+
+distribution：定义了沿着axis（轴）方向的视图集的布局。
+
+alignment：定义了垂直于stack view axis（轴）方向的视图集的布局。
+
+sapcing：定义了相邻视图的间隔。
+
+stack view同样的对于管理元素视图的 content-hugging 和 compression-resistance 的属性起作用。
+
+可以使用嵌套的stack view来构建复杂的视图。事实上，应该尽可能的多的使用stack view来管理布局，除非单独使用stack view已经不能达到目的，这是就可以使用约束。
+
+注意：尽管嵌套的satck view能够构建复杂的用户界面，也避免不了使用约束来辅助构建界面，因为至少也要为最外层的stack view添加约束来获取位置。
+
+UIStackView Class Reference: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStackView_Class_Reference/index.html#//apple_ref/doc/uid/TP40015256
