@@ -59,3 +59,6 @@ stack view同样的对于管理元素视图的 content-hugging 和 compression-r
 注意：尽管嵌套的satck view能够构建复杂的用户界面，也避免不了使用约束来辅助构建界面，因为至少也要为最外层的stack view添加约束来获取位置。
 
 UIStackView Class Reference: https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIStackView_Class_Reference/index.html#//apple_ref/doc/uid/TP40015256
+
+解析约束：https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/AnatomyofaConstraint.html#//apple_ref/doc/uid/TP40010853-CH9-SW1
+
