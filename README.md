@@ -38,4 +38,4 @@ autoresizing masks仅仅是布局改进的一个迭代，auto layout是一种全
 
 设计一组约束来创建特定行为的逻辑是非常不同于通过写代码或者面向对象编码的逻辑。幸运的是，掌握Auto Layout与掌握其他的编程任务并没有什么不同。第一：理解基于约束的layouts背后的逻辑;第二：学习API。在学习其他的编程任务的时候，你已经遵循了这些步骤，Auto Layout也不例。
 
-上面所记载的文字旨在帮助我过渡到Auto Layout，下面的文字将进一步学习Auto Layout。
+上面所记载的文字旨在帮助我过渡到Auto Layout，下面的文字将帮助我进一步学习Auto Layout。
