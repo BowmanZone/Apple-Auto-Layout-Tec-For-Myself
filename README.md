@@ -255,3 +255,5 @@ The alignment rectangle is the total visual space occupied by the view element i
 frame rectangle指的是视图的原始的frame，而alignment rectangle指的是布局视图中的视图可视区域
 
 ![frame rectangle 和 alignment rectangle的对比](http://img.blog.csdn.net/20150626144908579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFzaV94aQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+Auto Layout默认创建一个约束的优先级是1000，一般情况是不需要修改的，但是也可以通过修改优先级来处理特殊情况。例如：当container view的width变小的时候，它里面的subview的space就缩小，通过降低subview的优先级。
