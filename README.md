@@ -241,3 +241,12 @@ IntrinsicHeight、IntrinsicWidth约束视图的Intrinsic content size
 
 The intrinsic content size acts as an input to Auto Layout. When a view has an intrinsic content size, the system generates constraints to represent that size and the constraints are used to calculate the layout.
 The fitting size, on the other hand, is an output from the Auto Layout engine. It is the size calculated for a view based on the view’s constraints. If the view lays out its subviews using Auto Layout, then the system may be able to calculate a fitting size for the view based on its content.//satck view根据内容大小和属性来计算自身大小
+
+Select the type of rectangle you want to display.
+-
+The frame rectangle is the raw frame of the view element.
+
+The alignment rectangle is the total visual space occupied by the view element including any runtime adornments. It can be different than the frame rectangle.
+
+> frame rectangle指的是视图的原始的frame，而alignment rectangle指的是布局视图中的视图可视区域
+> ![frame rectangle 和 alignment rectangle的对比](http://img.blog.csdn.net/20150626144908579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFzaV94aQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
