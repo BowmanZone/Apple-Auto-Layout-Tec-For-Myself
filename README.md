@@ -247,7 +247,11 @@ Select the type of rectangle you want to display.
 The frame rectangle is the raw frame of the view element.
 
 The alignment rectangle is the total visual space occupied by the view element including any runtime adornments. It can be different than the frame rectangle.
-> ![视图构建器界面](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Art/IB_OM_H_frame_selector_2x.png)
-> ![选项](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Art/IB_OM_H_frame_align_rect_popup_2x.png)
-> frame rectangle指的是视图的原始的frame，而alignment rectangle指的是布局视图中的视图可视区域
-> ![frame rectangle 和 alignment rectangle的对比](http://img.blog.csdn.net/20150626144908579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFzaV94aQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+![视图构建器界面](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Art/IB_OM_H_frame_selector_2x.png)
+
+![选项](https://developer.apple.com/library/ios/recipes/xcode_help-IB_objects_media/Art/IB_OM_H_frame_align_rect_popup_2x.png)
+
+frame rectangle指的是视图的原始的frame，而alignment rectangle指的是布局视图中的视图可视区域
+
+![frame rectangle 和 alignment rectangle的对比](http://img.blog.csdn.net/20150626144908579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFzaV94aQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
