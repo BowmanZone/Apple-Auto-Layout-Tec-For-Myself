@@ -262,11 +262,4 @@ Size classes
 -
 为了更好地适应不同设备和不同方向的设备，使用约束和size classes来布局。首先设计好通用设备的布局，然后对不同的size classes做出添加、删除、修改约束来调整布局。
 
-Auto Layout独有的特性
--
 
-一些官方建议，让你使用Auto Layout更加得心应手
--
-> 明天补上
->		lll 
->			l
