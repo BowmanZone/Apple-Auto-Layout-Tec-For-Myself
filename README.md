@@ -236,6 +236,8 @@ IntrinsicHeight、IntrinsicWidth约束视图的Intrinsic content size
 > CR: 优先级越高，越晚被压缩。
 > CH: 优先级越高，越晚被拉伸。
 
+有时候在使用stack view的时候，需要修改CHCR的值，来适应视图被拉伸或是被压缩的情况。看官方的教程中有个例子
+
 建议：
 
 		When stretching a series of views to fill a space, if all the views have an identical content-hugging priority, the layout is ambiguous. Auto Layout doesn’t know which view should be stretched.  A common example is a label and text field pair. Typically, you want the text field to stretch to fill the extra space while the label remains at its intrinsic content size. To ensure this, make sure the text field’s horizontal content-hugging priority is lower than the label’s.  In fact, this example is so common that Interface Builder automatically handles it for you, setting the content-hugging priority for all labels to 251. If you are programmatically creating the layout, you need to modify the content-hugging priority yourself. 
