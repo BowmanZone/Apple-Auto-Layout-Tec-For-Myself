@@ -231,6 +231,11 @@ IntrinsicHeight、IntrinsicWidth约束视图的Intrinsic content size
 
 不管怎么样，尽可能使用视图的Intrinsic content size。它可以帮助你动态的布局视图内容，也可以减少约束的创建，避免冲突，但是你需要管理视图的 content-hugging 和 compression-resistance 的优先级。
 
+简称CHCR
+
+> CR: 优先级越高，越晚被压缩。
+> CH: 优先级越高，越晚被拉伸。
+
 建议：
 
 		When stretching a series of views to fill a space, if all the views have an identical content-hugging priority, the layout is ambiguous. Auto Layout doesn’t know which view should be stretched.  A common example is a label and text field pair. Typically, you want the text field to stretch to fill the extra space while the label remains at its intrinsic content size. To ensure this, make sure the text field’s horizontal content-hugging priority is lower than the label’s.  In fact, this example is so common that Interface Builder automatically handles it for you, setting the content-hugging priority for all labels to 251. If you are programmatically creating the layout, you need to modify the content-hugging priority yourself. 
