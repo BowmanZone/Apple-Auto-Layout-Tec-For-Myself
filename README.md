@@ -292,4 +292,16 @@ Size classes
 
 幸运的是，这里有一些方法来帮助你识别那些模棱两可的约束。所有的这些方法应该只用于调试，设置断点的地方你可以访问视图层次，然后在控制台调用以下方法：
 
+*hasAmbiguousLayout. Available for both iOS and OS X. Call this method on a misplaced view. It returns YES if the view’s frame is ambiguous. Otherwise, it returns NO.
+*exerciseAmbiguityInLayout. Available for both iOS and OS X. Call this method on a view with ambiguous layout. This will toggle the system between the possible valid solutions.
+*constraintsAffectingLayoutForAxis:. Available for iOS. Call this method on a view. It returns an array of all the constraints affecting that view along the specified axis.
+*constraintsAffectingLayoutForOrientation:. Available for OS X. Call this method on a view. It returns an array of all the constraints affecting that view along the specified orientation.
+*_autolayoutTrace. Available as a private method in iOS. Call this method on a view. It returns a string with diagnostic information about the entire view hierarchy containing that view. Ambiguous views are labeled, and so are views that have translatesAutoresizingMaskIntoConstraints set to YES.
+
+*note:You may need to use Objective-C syntax when running these commands in the console. For example, after the breakpoint halts execution, type call [self.myView exerciseAmbiguityInLayout]into the console window to call the exerciseAmbiguityInLayout method on the myView object. Similarly, type po [self.myView autolayoutTrace] to print out diagnostic information about the view hierarchy containing myView.
+
+Be sure to fix any issues found by Interface Builder before running the diagnostic methods listed above. Interface Builder attempts to repair any errors it finds. This means that if it finds an ambiguous layout, it adds constraints so that the layout is no longer ambiguous.
+
+As a result, hasAmbiguousLayout returns NO. exerciseAmbiguityInLayout does not appear to have any effect, and constraintsAffectingLayoutForAxis: may return additional, unexpected constraints.
+
 *逻辑错误。布局逻辑存在bug
