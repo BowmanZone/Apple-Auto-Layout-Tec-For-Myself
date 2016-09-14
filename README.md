@@ -298,7 +298,7 @@ Size classes
 * constraintsAffectingLayoutForOrientation:. Available for OS X. Call this method on a view. It returns an array of all the constraints affecting that view along the specified orientation.
 * _autolayoutTrace. Available as a private method in iOS. Call this method on a view. It returns a string with diagnostic information about the entire view hierarchy containing that view. Ambiguous views are labeled, and so are views that have translatesAutoresizingMaskIntoConstraints set to YES.
 
-* note:You may need to use Objective-C syntax when running these commands in the console. For example, after the breakpoint halts execution, type call [self.myView exerciseAmbiguityInLayout]into the console window to call the exerciseAmbiguityInLayout method on the myView object. Similarly, type po [self.myView autolayoutTrace] to print out diagnostic information about the view hierarchy containing myView.
+note:You may need to use Objective-C syntax when running these commands in the console. For example, after the breakpoint halts execution, type call [self.myView exerciseAmbiguityInLayout]into the console window to call the exerciseAmbiguityInLayout method on the myView object. Similarly, type po [self.myView autolayoutTrace] to print out diagnostic information about the view hierarchy containing myView.
 
 Be sure to fix any issues found by Interface Builder before running the diagnostic methods listed above. Interface Builder attempts to repair any errors it finds. This means that if it finds an ambiguous layout, it adds constraints so that the layout is no longer ambiguous.
 
