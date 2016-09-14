@@ -278,7 +278,7 @@ Size classes
 
 约束错误类型：
 -
-*不满足条件的约束。没有有效解决方案的约束
+* 不满足条件的约束。没有有效解决方案的约束
 
 不满足条件的布局发生在系统不能为当前的一套约束找到一个有效的解决方案。两个或者两个以上的约束冲突，因为它们不能在同时有效。
 
@@ -286,22 +286,22 @@ Size classes
 
 注意：IB并不会将所有的可能布局错误检测出来，因此，即时可以修复那些被IB标记的显而易见错误，这依然不够。仍然需要在运行时测试各种屏幕尺寸、方向、动态类型尺寸，和你需要支持的语言。
 
-*模棱两可的约束。有两种或者多种可能的解决方案的约束
+* 模棱两可的约束。有两种或者多种可能的解决方案的约束
 
 模棱两可的约束相比不满足条件的约束更难检测和标记，即时模棱两可的约束有一个显而易见、可见的错误，它也是很难被检测出来是否是约束模棱两可还是约束的逻辑错误。
 
 幸运的是，这里有一些方法来帮助你识别那些模棱两可的约束。所有的这些方法应该只用于调试，设置断点的地方你可以访问视图层次，然后在控制台调用以下方法：
 
-*hasAmbiguousLayout. Available for both iOS and OS X. Call this method on a misplaced view. It returns YES if the view’s frame is ambiguous. Otherwise, it returns NO.
+* hasAmbiguousLayout. Available for both iOS and OS X. Call this method on a misplaced view. It returns YES if the view’s frame is ambiguous. Otherwise, it returns NO.
 *exerciseAmbiguityInLayout. Available for both iOS and OS X. Call this method on a view with ambiguous layout. This will toggle the system between the possible valid solutions.
-*constraintsAffectingLayoutForAxis:. Available for iOS. Call this method on a view. It returns an array of all the constraints affecting that view along the specified axis.
-*constraintsAffectingLayoutForOrientation:. Available for OS X. Call this method on a view. It returns an array of all the constraints affecting that view along the specified orientation.
-*_autolayoutTrace. Available as a private method in iOS. Call this method on a view. It returns a string with diagnostic information about the entire view hierarchy containing that view. Ambiguous views are labeled, and so are views that have translatesAutoresizingMaskIntoConstraints set to YES.
+* constraintsAffectingLayoutForAxis:. Available for iOS. Call this method on a view. It returns an array of all the constraints affecting that view along the specified axis.
+* constraintsAffectingLayoutForOrientation:. Available for OS X. Call this method on a view. It returns an array of all the constraints affecting that view along the specified orientation.
+* _autolayoutTrace. Available as a private method in iOS. Call this method on a view. It returns a string with diagnostic information about the entire view hierarchy containing that view. Ambiguous views are labeled, and so are views that have translatesAutoresizingMaskIntoConstraints set to YES.
 
-*note:You may need to use Objective-C syntax when running these commands in the console. For example, after the breakpoint halts execution, type call [self.myView exerciseAmbiguityInLayout]into the console window to call the exerciseAmbiguityInLayout method on the myView object. Similarly, type po [self.myView autolayoutTrace] to print out diagnostic information about the view hierarchy containing myView.
+* note:You may need to use Objective-C syntax when running these commands in the console. For example, after the breakpoint halts execution, type call [self.myView exerciseAmbiguityInLayout]into the console window to call the exerciseAmbiguityInLayout method on the myView object. Similarly, type po [self.myView autolayoutTrace] to print out diagnostic information about the view hierarchy containing myView.
 
 Be sure to fix any issues found by Interface Builder before running the diagnostic methods listed above. Interface Builder attempts to repair any errors it finds. This means that if it finds an ambiguous layout, it adds constraints so that the layout is no longer ambiguous.
 
 As a result, hasAmbiguousLayout returns NO. exerciseAmbiguityInLayout does not appear to have any effect, and constraintsAffectingLayoutForAxis: may return additional, unexpected constraints.
 
-*逻辑错误。布局逻辑存在bug
+* 逻辑错误。布局逻辑存在bug
