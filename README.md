@@ -305,3 +305,18 @@ Be sure to fix any issues found by Interface Builder before running the diagnost
 As a result, hasAmbiguousLayout returns NO. exerciseAmbiguityInLayout does not appear to have any effect, and constraintsAffectingLayoutForAxis: may return additional, unexpected constraints.
 
 * 逻辑错误。布局逻辑存在bug
+
+通过编码方式创建约束
+=
+尽可能的使用IB创建约束，IB提供工具来可视化、编辑、管理和debug约束，在设计时分析约束错误，让你能够发现并且修复问题。当然你也可以使用编码方式来创建约束：
+
+* Layout Anchors
+
+NSLayoutAnchor class为创建约束提供了一套连贯的接口。使用这个API来访问你想要约束元素的anchor属性。例如，视图控制器的top和bottom layout guides有topAnchor、bottomAnchor和heightAnchor属性。另外，视图为它们的edges、centers、size和baselines提供anchors。
+
+注意：在iOS中，视图也有layoutMarginsGuide和readableContentGuide属性，这些属性分别提供了展示视图margins和readable content guide的UILayoutGuide对象。反过来说，这些guides为它们的edges、centers、size提供了anchors。
+
+使用这些guides通过编码方式来为margins或者readable Content guides创建约束。
+
+* 使用NSLayoutConstraint class
+* 使用Visual Format Language
