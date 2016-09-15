@@ -374,4 +374,19 @@ layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类
        	leftButton.widthAnchor.constraintEqualToAnchor(rightButton.widthAnchor).active = true
 
 * 使用NSLayoutConstraint class
+
+也可以通过NSLayoutConstraint class的constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:方法来直接创建约束。这个方法显示的把约束等式转化为了代码，代码中的每一个参数对应一个约束等式的一部分。
+	
+不像采用anchor API，你必须为每一个参数指定一个值，即时它不会对布局产生影响。这就导致了大量的样板代码，通常是很难阅读的。
+	
+	NSLayoutConstraint(item: myView, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .LeadingMargin, multiplier: 1.0, constant: 0.0).active = true
+ 
+	NSLayoutConstraint(item: myView, attribute: .Trailing, relatedBy: .Equal, toItem: view, attribute: .TrailingMargin, multiplier: 1.0, constant: 0.0).active = true
+ 
+	NSLayoutConstraint(item: myView, attribute: .Height, relatedBy: .Equal, toItem: myView, attribute:.Width, multiplier: 2.0, constant:0.0).active = true
+	
+注意：在iOS中，NSLayoutAttribute枚举值包含了视图的margins，这就意味着你可以不通过layoutMarginsGuide属性来创建margins约束。然而，你仍然需要使用readableContentGuide属性来创建readable content guides约束。注意上面提到的注意事项里面的两点
+
+这个方法并不会突出那些重要的约束，乍一看、扫一眼代码可能会漏电一些细节。此外，编译器不会对约束执行任何的静态分析，可以自由地创建无效的约束，这些约束会在运行时抛出异常。除非需要支持iOS8、OS X v10.10或者更早版本，考虑将代码迁移到更新的anchor布局API。
+
 * 使用Visual Format Language
