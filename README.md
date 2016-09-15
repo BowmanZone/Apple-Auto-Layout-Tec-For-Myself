@@ -322,12 +322,19 @@ layout archors有几个创建约束不同的方法，每一个方法中的参数
 
 layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类，这些子类为创建约束添加类型信息和特定子类的方法。这样可以有效地防止创建不可用的约束。
 > 你不能直接使用NSLayoutAnchors，相反，你应该根据你所创建的约束类型使用NSLayoutAnchors的一个子类：
+
 > NSLayoutXAixsAnchor 创建水平方向的约束
+
 > NSLayoutYAxisAnchor 创建垂直方向的约束
+
 > NSLayoutDimension 创建维度上的约束，长度和宽度
+
 > 一旦你通过使用UIView、NSView、UILayoutGuide来访问NSLayoutAnchor，自动的就为你选择了一个正确的子类。
+
 > 注意：
+
 > * UIView并没有为layout margin提供anchor属性，而是通过layoutMarginGuide属性提供一个UILayoutGuide对象（展示这些margins），使用guide的anchor来创建约束。
+
 > * 尽管NSLayoutAnchor class提供了额外的类型检查，也有可能产生不可用的约束。leadingAnchor与leftAnchor约束的时候（它们都是NSLayoutXAxisAnchor实例），autolayout并不允许使用混合的约束，最终在运行时约束就会崩溃。
 
 * 使用NSLayoutConstraint class
