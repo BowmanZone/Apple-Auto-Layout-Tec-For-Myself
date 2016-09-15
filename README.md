@@ -337,5 +337,29 @@ layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类
 
 > * 尽管NSLayoutAnchor class提供了额外的类型检查，也有可能产生不可用的约束。leadingAnchor与leftAnchor约束的时候（它们都是NSLayoutXAxisAnchor实例），autolayout并不允许使用混合的约束，最终在运行时约束就会崩溃。
 
+> 	self.view.translatesAutoresizingMaskIntoConstraints = false
+>        
+>       let leftButton = UIButton.init(type: .Custom)
+>       leftButton.setTitle("leftButton", forState: .Normal)
+>       leftButton.backgroundColor = UIColor.blueColor()
+>       leftButton.translatesAutoresizingMaskIntoConstraints = false
+>       
+>       let rightButton = UIButton.init(type: .Custom)
+>       rightButton.setTitle("rightButton", forState: .Normal)
+>       rightButton.backgroundColor = UIColor.redColor()
+> 	rightButton.translatesAutoresizingMaskIntoConstraints = false
+>       
+>       self.view.addSubview(leftButton)
+>       self.view.addSubview(rightButton)
+>       
+>       let margins = self.view.layoutMarginsGuide
+>
+>       leftButton.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+>       margins.bottomAnchor.constraintEqualToAnchor(leftButton.bottomAnchor, constant: 20).active = true
+>       rightButton.leadingAnchor.constraintEqualToAnchor(leftButton.trailingAnchor, constant: 30).active = true
+>       rightButton.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+>       margins.bottomAnchor.constraintEqualToAnchor(rightButton.bottomAnchor, constant: 20).active = true
+>       leftButton.widthAnchor.constraintEqualToAnchor(rightButton.widthAnchor).active = true
+
 * 使用NSLayoutConstraint class
 * 使用Visual Format Language
