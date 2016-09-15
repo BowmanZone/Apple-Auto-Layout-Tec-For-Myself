@@ -321,7 +321,8 @@ NSLayoutAnchor class为创建约束提供了一套连贯的接口。使用这个
 layout archors有几个创建约束不同的方法，每一个方法中的参数仅仅对等是两边的元素产生影响。
 
 layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类，这些子类为创建约束添加类型信息和特定子类的方法。这样可以有效地防止创建不可用的约束。
-> 你不能直接使用NSLayoutAnchors，相反，你应该根据你所创建的约束类型使用NSLayoutAnchors的一个子类：
+
+你不能直接使用NSLayoutAnchors，相反，你应该根据你所创建的约束类型使用NSLayoutAnchors的一个子类：
 
 > NSLayoutXAixsAnchor 创建水平方向的约束
 
@@ -329,9 +330,9 @@ layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类
 
 > NSLayoutDimension 创建维度上的约束，长度和宽度
 
-> 一旦你通过使用UIView、NSView、UILayoutGuide来访问NSLayoutAnchor，自动的就为你选择了一个正确的子类。
+一旦你通过使用UIView、NSView、UILayoutGuide来访问NSLayoutAnchor，自动的就为你选择了一个正确的子类。
 
-> 注意：
+注意：
 
 > * UIView并没有为layout margin提供anchor属性，而是通过layoutMarginGuide属性提供一个UILayoutGuide对象（展示这些margins），使用guide的anchor来创建约束。
 
@@ -390,3 +391,15 @@ layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类
 这个方法并不会突出那些重要的约束，乍一看、扫一眼代码可能会漏电一些细节。此外，编译器不会对约束执行任何的静态分析，可以自由地创建无效的约束，这些约束会在运行时抛出异常。除非需要支持iOS8、OS X v10.10或者更早版本，考虑将代码迁移到更新的anchor布局API。
 
 * 使用Visual Format Language
+
+VFL让你使用像字符串一样的ASCII艺术形式来描述约束。
+
+VFL有以下的几个优点和缺点：
+
+1. auto layout使用VFL向控制台打印约束信息。正是这个原因，debug信息看起来就像是使用代码创建约束。
+2. VFL通过使用一个很紧凑的表达式来一次性创建多个约束。
+3. VFL只会创建有效的约束。
+4. 符号强调了好的可视性而不是完整性。因此，有些约束不能通过VFL来创建，例如 aspect ratios
+5. 编译器不会检查字符串的可用性，只能通过测试来修复错误。
+
+很多地方都建议说不要使用VFL来添加约束，但是我觉得这个存在肯定有它的意义所在，就好比debug信息，反正觉得VFL挺好玩的。
