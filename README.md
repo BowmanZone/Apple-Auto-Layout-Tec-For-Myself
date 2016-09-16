@@ -458,3 +458,63 @@ Working with Self-Sizing Table View Cells
 > * Constraints that position your subview relative to the cell’s content view.
 > * Constraints that position your subview relative to the cell’s bounds.
 > * Constraints that position your subview relative to the predefined content.
+
+# 改变约束
+任何约束的改变都会改变约束的底层数学表达式。
+
+下面所有的行为都会改变一个或者更多的约束：
+
+* 激活或者注销一个约束
+* 改变约束的常数`constant`值
+* 改变约束的优先级
+* 从视图层级中移除视图
+
+像设置控件的属性、修改视图层级的其他改变都会改变约束。当一个改变发生的时候，系统会传递一个延时布局的时间表。（`a deferred layout pass` ，有点像调用setNeedsLayout之类响应布局的延时布局，看下面一小节）
+
+一般来说，你可以在任何时候改变这些。理想情况下，大多数的约束应该在IB中创建，或者通过编码方式在view controller初始（比如在viewDifLoad中）建立的时候创建。如果你需要在运行时动态的改变约束，通常最适合改变的时候是在应用状态改变的时候。比如，你想通过改变一个约束来响应一个按钮被点击，直接在按钮点击事件方法中实现改变。
+
+有时候，你可能想要批量地处理一些性能变化的原因。`Batching Changes`注意看下面小结。
+
+## The Deferred Layout Pass
+auto layout并不是立刻就更新受影响视图的frames，它会将布局列一个表给最近的刷新时刻（很像setNeedsLayout，标记需要重新布局，然后等待下一次刷新时刻）。The Deferred Layout Pass更新布局的约束，然后计算出在视图层级中所有视图的frames。
+
+你可以通过调用`setNeedsLayout`和`setNeedsUpdateConstraints`方法来设计自己的延时布局时间表。
+
+The Deferred Layout Pass实际上对视图层级包含两个步骤：
+> 1. 必要的，`update pass`更新约束
+> 2. 必要的，`layout pass`重新定位reposition视图的frames
+
+### Update Pass
+系统遍历视图层级结构，并且对所有的view controller调用`updateViewConstraints`方法，为所有的view调用`updateConstraints`方法。你可以覆盖重写这些方法来优化你的约束变化。（see `Batching Changes`）
+
+### Layout Pass
+系统再次遍历视图层级结构，并且对所有的view controller调用` viewWillLayoutSubviews`方法，对所有的view调用`layoutSubviews`（OS X中调用 layout）方法。默认情况下，layoutSubviews方法会更新每一个有reatangle（被auto layout引擎计算出来的rectangle，注意前面有提到的`alignment rectangle`和`frame rectangle`的区别）的subview的frames。你可以覆盖重写这些方法来修改layout（see `Custom Layouts`）
+
+## Batching Changes
+在改变发生时候，立即更新一个约束是简洁明了的。在之后的方法中延迟这些改变是的代码更加复杂，也更加不易理解。
+
+有些时候，你可能想要批量处理性能引起的变化。只有在改变约束太慢的地方，或是当视图有一个冗余的变化的时候才会这样做。
+
+在拥有约束的视图上调用`setNeedsUpdateConstraints`来批量处理改变，而不是立刻就改变。然后，覆盖重写视图的`updateConstraints`方法来修改受影响的约束。
+
+> 注意：
+你的`updateConstraints`实现必须尽可能的高效。不要注销掉你所有的约束，然后又重新激活你需要的约束。相反，你的app应该追踪你的约束，并且在每一个更新过程中确保它们。仅仅改变那个需要被改变的项。在每一个更新过程中，你必须确保对app当前的状态有相对应的约束。
+
+在` updateConstraints `的实现方法最后始终调用超类实现。
+
+不要在` updateConstraints `中调用`setNeedsUpdateConstraints`方法。调用`setNeedsUpdateConstraints`延时安排另一个update pass，会造成一个回路、循环（递归死循环）。
+
+## Custom Layout
+
+覆盖重写`viewWillLAyoutSubviews`和`layoutSubviews`方法来修改被layout引擎返回的结果。
+
+> 重要：
+> 如果可能的话，使用约束来定义所有的布局。这样的布局结果更加地健壮、更容易调试。当你需要创建一个不能单独用约束表达的布局的时候，你应该只重写覆盖`viewWillLayoutSubviews`或` layoutSubviews`方法。
+
+当重写这些方法的时候，布局在一个不一致的状态。一些视图可能已经被加载了，另外的可能还没有被加载出来。对于如何修改视图层级结构你需要非常的小心，否则你会创建一个回路循环（递归死循环）。下面的规则可以帮助你避免这个死循环：
+> * 在你的方法定义中必须调用超类定义
+> * 你可以在你的子树结构中安全的使布局视图无效，但是，你必须在这之前调用超类实现。
+> * 不要在你的子树结构层以外使任何的布局视图无效，这会造成一个死循环。
+> * 不要调用`setNeedsUpdateConstraint`方法，You have just completed an update pass. Calling this method creates a feedback loop.
+> * 不要调用`setNeedsLayout`方法，会造成死循环。
+> * 改变约束时要仔细。你不会想要在你子树层结构以为的任何视图的布局意外失效的。
