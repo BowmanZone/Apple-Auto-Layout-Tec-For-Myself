@@ -432,3 +432,29 @@ VFL有以下的几个优点和缺点：
 > 如果你的content没有一个内在内容大小，你就必须添加适当的size约束，要么是content view的，要么是content的。（照应上一段，必须要有一个固定的content size才能确定scroll view的contentSize）
 >
 > 当content view比scroll view更高的时候，scroll view运行垂直方向的scrolling；当content view比scroll view更宽的时候，scroll view允许水平方向的scrolling；否则，默认不允许scrolling。
+
+Working with Self-Sizing Table View Cells
+=
+在iOS中，可以使用Auto Layout来定义table view cell的高度，然而，这个功能默认是关闭的。
+
+通常，一个cell的高度是被table view的代理方法所定义的：`tableView:heightForRowAtIndexPath:`,为了使用自适应的table view cells，你必须设置table view的`rowHeight`属性为`UITableViewAutomaticDimension`，你也必须为` estimatedRowHeight`属性定义一个值。只要这些属性都被设置了，系统就会使用auto layout来计算实际的行高值。
+> tableView.estimatedRowHeight = 85.0
+> 
+> tableView.rowHeight = UITableViewAutomaticDimension
+
+下一步，在table view的content view中定义cell的content。为了定义cell的高度，你需要一套完整的约束和视图（定义了高度）来填充concontent view的top edge到bottom edge区域。如果你的视图没有intrinsic content heights，系统就会使用这个值。如果没有，你必须添加对应的高度约束，不管是对视图还是对content view自身。（和上面的scroll view的要求很类似，必须要有一套完整的约束）
+
+通常，尽可能的让`estimated row height`精确。系统计算像scroll bar的高度就是基于这些estimates。越精确，用户体检越好。
+
+> 注意：
+> 
+> 当使用table view cells的视乎，你不能改变`预定义内容`的约束，比如`textLabel`、`detailTextLabel`和`imageView`属性。
+>
+> 支持下面的约束：
+>
+> * 依靠cell的content view定位子视图的约束
+> * 依靠cell的bounds定位子视图的约束
+> * 依靠预定义内容定位子视图的约束
+> * Constraints that position your subview relative to the cell’s content view.
+> * Constraints that position your subview relative to the cell’s bounds.
+> * Constraints that position your subview relative to the predefined content.
