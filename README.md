@@ -403,3 +403,31 @@ VFL有以下的几个优点和缺点：
 5. 编译器不会检查字符串的可用性，只能通过测试来修复错误。
 
 很多地方都建议说不要使用VFL来添加约束，但是我觉得这个存在肯定有它的意义所在，就好比debug信息，反正觉得VFL挺好玩的。
+
+使用scroll view
+=
+当使用scroll view的时候，你需要定义scroll view在它的父视图中frame的size和posiiton，还有scroll view的content 区域大小，所有这些工作都可以通过Auto layout实现。
+
+* scroll view和scroll view外部的对象之间的frame约束关系就像任何其他的视图一样。可以理解为就像两个视图之间的约束关系一样来处理scroll view。
+* 对于scroll view和它的content之间的约束，取决于约束条件的性质：
+	
+	- scroll view的edges或margins和它的content区域之间的，连接scroll view的content区域的约束。（理解为content view的leading、trilling、top、bottom的四个方向的约束）
+	- height，width或centers，连接scroll view的frame的约束。（理解为对宽、高或者centers的约束）
+	
+* 通过使用scroll view的content和scroll view外部对象的约束来为scroll view的content提供一个完整的position，使content就像是悬浮在scroll view上方。
+
+当你使用一个dummy view或者layout group来管理scroll view的content，这个逻辑就会变得非常简单：
+
+1. 添加一个scroll view到界面上。
+2. 像平常一样，定义scroll view的size和position。
+3. 添加一个view到scroll view上。设置这个view的Xcode specific label值为 Content View。（这个view就作为一个dummy view来管理scroll view的content）
+4. 定义content view的的top、bottom、leading和trailing edges到scroll view相应的edges。这个content view定义了scroll view的content区域。
+> 这个content view还没有一个完整的size。它会被拉伸和压缩以适应那些被你放入其中的视图和控件。（content view被拉伸和压缩，这样才能够放下更多或是刚好装下你放入的控件或视图，并不是去拉伸或压缩那些控件）
+5. （可选）为了禁止水平方向的scrolling，设置content view的width等于scroll view的width，content view现在填满了scroll view的水平方向。
+6. （可选）为了禁止垂直方向的srolling，设置content view的height等于scroll view的height，content view现在填满了scroll view的垂直方向。
+7. 在content view中布局scroll view的content，像平常一样使用约束来定位content view中的content。（集中精力沿着view的edges来布局你想要布局的界面内容，而不是考虑scroll view的contentSize这些乱七八糟的东西）
+> 重要：你必须完全地定义content view的size（除了5和6设置步骤的定义）。为了设置基于你的content的内在大小的height（垂直方向的scrolling），你必须从content view的top edge到bottom edge有一套完整约束链和拉伸的视图。相似的（水平方向的scrolling），width，你也必须从content view的leading edge到trailing edge的一套完整的约束链和拉伸视图。（这里理解为 要确定content view固定的height或width，以确定scroll view的contenSize）
+>
+> 如果你的content没有一个内在内容大小，你就必须添加适当的size约束，要么是content view的，要么是content的。（照应上一段，必须要有一个固定的content size才能确定scroll view的contentSize）
+>
+> 当content view比scroll view更高的时候，scroll view运行垂直方向的scrolling；当content view比scroll view更宽的时候，scroll view允许水平方向的scrolling；否则，默认不允许scrolling。
