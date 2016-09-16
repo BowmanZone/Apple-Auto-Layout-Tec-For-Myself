@@ -426,6 +426,7 @@ VFL有以下的几个优点和缺点：
 5. （可选）为了禁止水平方向的scrolling，设置content view的width等于scroll view的width，content view现在填满了scroll view的水平方向。
 6. （可选）为了禁止垂直方向的srolling，设置content view的height等于scroll view的height，content view现在填满了scroll view的垂直方向。
 7. 在content view中布局scroll view的content，像平常一样使用约束来定位content view中的content。（集中精力沿着view的edges来布局你想要布局的界面内容，而不是考虑scroll view的contentSize这些乱七八糟的东西）
+
 > 重要：你必须完全地定义content view的size（除了5和6设置步骤的定义）。为了设置基于你的content的内在大小的height（垂直方向的scrolling），你必须从content view的top edge到bottom edge有一套完整约束链和拉伸的视图。相似的（水平方向的scrolling），width，你也必须从content view的leading edge到trailing edge的一套完整的约束链和拉伸视图。（这里理解为 要确定content view固定的height或width，以确定scroll view的contenSize）
 >
 > 如果你的content没有一个内在内容大小，你就必须添加适当的size约束，要么是content view的，要么是content的。（照应上一段，必须要有一个固定的content size才能确定scroll view的contentSize）
