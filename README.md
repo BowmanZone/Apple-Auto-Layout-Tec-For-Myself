@@ -404,6 +404,41 @@ VFL有以下的几个优点和缺点：
 
 很多地方都建议说不要使用VFL来添加约束，但是我觉得这个存在肯定有它的意义所在，就好比debug信息，反正觉得VFL挺好玩的。
 
+`https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH27-SW1`
+
+	self.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let leftButton = UIButton.init(type: .Custom)
+        leftButton.setTitle("leftButton", forState: .Normal)
+        leftButton.backgroundColor = UIColor.blueColor()
+        leftButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let rightButton = UIButton.init(type: .Custom)
+        rightButton.setTitle("rightButton", forState: .Normal)
+        rightButton.backgroundColor = UIColor.redColor()
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
+
+        self.view.addSubview(leftButton)
+        self.view.addSubview(rightButton)
+        
+	let views: [String: AnyObject] = ["leftButton" : leftButton, "rightButton": rightButton]
+        
+        let formatStringH: String = "H:|-margin-[leftButton(==rightButton)]-spacing-[rightButton]-margin-|"
+        let formatStringVLeft: String = "V:[leftButton]-bottom-|"
+        let formatStringVRight: String = "V:[rightButton]-bottom-|"
+        
+        let metrics = ["leading": 0, "trailing": 0, "spacing": 30, "bottom": 20, "margin": 20]
+        
+        let constraintsH = NSLayoutConstraint.constraintsWithVisualFormat(formatStringH, options: .AlignAllFirstBaseline, metrics: metrics, views: views)
+        let constraintsVLeft = NSLayoutConstraint.constraintsWithVisualFormat(formatStringVLeft, options: .AlignAllFirstBaseline, metrics: metrics, views: views)
+        let constraintsVRight = NSLayoutConstraint.constraintsWithVisualFormat(formatStringVRight, options: .AlignAllFirstBaseline, metrics: metrics, views: views)
+        
+        NSLayoutConstraint.activateConstraints(constraintsH)
+        NSLayoutConstraint.activateConstraints(constraintsVLeft)
+        NSLayoutConstraint.activateConstraints(constraintsVRight)
+        
+同上面的使用anchor添加约束的效果一样
+
 使用scroll view
 =
 当使用scroll view的时候，你需要定义scroll view在它的父视图中frame的size和posiiton，还有scroll view的content 区域大小，所有这些工作都可以通过Auto layout实现。
