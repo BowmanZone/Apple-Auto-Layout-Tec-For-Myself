@@ -404,9 +404,7 @@ VFL有以下的几个优点和缺点：
 
 很多地方都建议说不要使用VFL来添加约束，但是我觉得这个存在肯定有它的意义所在，就好比debug信息，反正觉得VFL挺好玩的。
 
-`https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH27-SW1[id]`
-
-[id]: https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH27-SW1
+VFL规范 <https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH27-SW1>
 
 	self.view.translatesAutoresizingMaskIntoConstraints = false
         
