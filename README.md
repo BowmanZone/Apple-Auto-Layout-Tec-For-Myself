@@ -185,7 +185,7 @@ For location attributes, you cannot constrain Leading or Trailing attributes to 
 可选的约束和不等式通常会一起起作用。例如：
 
     Blue.leading >= 1.0 * Red.trailing + 8.0
-		Blue.leading <= 1.0 * Red.trailing + 8.0
+    Blue.leading <= 1.0 * Red.trailing + 8.0
 	
 这里为两个不等式提供了不同的约束，>=需要一个高优先级（1000priority）的关系，<=有一个低优先级（250priority）的关系。这就意味着Blueview和Redview之间不能少于8.0点的距离（满足高优先级>=，<=低优先级会被按顺序被满足），然而鉴于布局中的其他约束条件，其他约束可以把Blueview往远处拉。同时，可选约束会把Blueview拉向Redview这边，以尽可能地让它们之间的空隙值接近8.0点。这就是为什么可选的约束和不等式通常会一起起作用。
 
@@ -388,7 +388,7 @@ layout anchors也提供了其他安全的类型。NSLayoutAnchors有一些子类
 	
 注意：在iOS中，NSLayoutAttribute枚举值包含了视图的margins，这就意味着你可以不通过layoutMarginsGuide属性来创建margins约束。然而，你仍然需要使用readableContentGuide属性来创建readable content guides约束。注意上面提到的注意事项里面的两点
 
-这个方法并不会突出那些重要的约束，乍一看、扫一眼代码可能会漏电一些细节。此外，编译器不会对约束执行任何的静态分析，可以自由地创建无效的约束，这些约束会在运行时抛出异常。除非需要支持iOS8、OS X v10.10或者更早版本，考虑将代码迁移到更新的anchor布局API。
+这个方法并不会突出那些重要的约束，乍一看、扫一眼代码可能会漏掉一些细节。此外，编译器不会对约束执行任何的静态分析，可以自由地创建无效的约束，这些约束会在运行时抛出异常。除非需要支持iOS8、OS X v10.10或者更早版本，考虑将代码迁移到更新的anchor布局API。
 
 * 使用Visual Format Language
 
@@ -483,7 +483,7 @@ Working with Self-Sizing Table View Cells
 
 > 注意：
 > 
-> 当使用table view cells的视乎，你不能改变`预定义内容`的约束，比如`textLabel`、`detailTextLabel`和`imageView`属性。
+> 当使用table view cells的时候，你不能改变`预定义内容`的约束，比如`textLabel`、`detailTextLabel`和`imageView`属性。
 >
 > 支持下面的约束：
 >
